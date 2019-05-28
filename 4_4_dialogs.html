@@ -125,22 +125,22 @@
     <!-- START HERE -->
 
     <!-- TOAST BUTTON -->
-    <a class="btn">Show Toast</a>
+    <a class="btn" id="toast1">Show Toast</a>
 
     <!-- ROUNDED TOAST -->
-    <a class="btn">Rounded Toast</a>
+    <a class="btn" id="toast2">Rounded Toast</a>
 
     <!-- CALLBACK ON DISMISS -->
-    <a class="btn">Toast With Callback</a>
+    <a class="btn" id="toast3">Toast With Callback</a>
 
     <br>
     <br>
 
     <!-- TOOLTIPS -->
-    <a class="btn">Bottom Tooltip</a>
-    <a class="btn">Top Tooltip</a>
-    <a class="btn">Right Tooltip</a>
-    <a class="btn">Left Tooltip</a>
+    <a class="btn tooltipped" data-delay="0" data-position="bottom" data-tooltip="Bottom">Bottom Tooltip</a>
+    <a class="btn tooltipped" data-delay="0" data-position="top" data-tooltip="Top">Top Tooltip</a>
+    <a class="btn tooltipped" data-delay="0" data-position="right" data-tooltip="Right">RIght Tooltip</a>
+    <a class="btn tooltipped" data-delay="0" data-position="left" data-tooltip="Left">Left Tooltip</a>
 
 
     <!-- END HERE -->
@@ -156,20 +156,42 @@
   <script type="text/javascript" src="js/materialize.min.js"></script>
 
   <script>
-    $(document).ready(function () {
+    $(document).ready(() => {
       $('.dropdown-button').dropdown({
         constrainWidth: false,
-        hover: true,
         belowOrigin: true,
-        alignment: 'left'
+        alignment: 'left',
+        inDuration: 50,
+        outDuration: 100
       });
 
-      // JAVASCRIPT START HERE //
+      //TOAST
+      $('#toast1').click(() => Materialize.toast('I am Toast', 3000)); 
+
+      //ROUNDED WITH REMOVE TIMEOUT
+      $('#toast2').click(function () {
+        Materialize.toast('I am Toast', 3000, 'rounded');
+        
+        setTimeout(function () {
+          Materialize.Toast.removeAll();
+        }, 1000);
+      }); 
+
+      //TOAST CALLBACK
+      $('#toast3').click(function () {
+        Materialize.toast('I am Toast', 3000, '', function () {
+          alert('Hello');
+        })
+      });
 
 
 
 
-    });
+    })
+
+
+    // VANILLA JAVASCRIPT CODE
+    // document.querySelector('#toast1').addEventListener('click', () => Materialize.toast('I am Toast', 3000));
   </script>
 </body>
 
